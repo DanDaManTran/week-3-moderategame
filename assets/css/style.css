@@ -11,7 +11,7 @@ a{
 }
 
 p{
-	font-size: 24px;
+	font-size: 3rem;
 }
 
 h3{
@@ -19,11 +19,15 @@ h3{
 }
 
 .info{
-	font-size: 16px;
+	font-size: 2rem;
 }
 
 header{
 	margin-bottom: 5%;
+}
+
+#answer{
+ font-size: 2rem;
 }
 
 .bubble 
