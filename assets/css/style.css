@@ -70,3 +70,10 @@ z-index: 0;
 bottom: -38px;
 left: 99px;
 }
+
+footer{
+	font-size: 2rem;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+}

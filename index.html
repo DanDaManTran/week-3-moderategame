@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<title>Mario HangMan</title>
+  <title>Mario HangMan</title>
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -17,13 +17,13 @@
 
   <div class="col-sm-4">
     <p class="info container">Bowser has captured Mario and you have to guess a video game title to save Mario from the in presentment. Press any key to begin.</p>
-  	<p>Wins: <span id="wins"></span></p>
-  	<p>Loses: <span id="loses"></span></p>
+    <p>Wins: <span id="wins"></span></p>
+    <p>Loses: <span id="loses"></span></p>
     <p><span id="displayWord"></span></p>
     <p>Player Guesses: <span id="playerGuesses"></span></p>
   </div>
 
-	<div class="col-sm-4">
+  <div class="col-sm-4">
     <img id="picture" src="assets/images/mario0.png"/>
   </div>
 
@@ -34,69 +34,64 @@
     <img class="resize" src="assets/images/bowser.png"/>
   </div>
 
-
-	<script type="text/javascript">
-		var index=["HALO", "SUPER MARIO", "LEGEND OF ZELDA", "MORTAL KOMBAT", "FINAL FANTASY", "SONIC", "DONKEY KONG", "METAL GEAR SOLID", "SUPER SMASH BROS", "POKEMON", "KINGDOM HEARTS", "RESIDENT EVIL", "TETRIS", "MARBLE MADNESS", "CONTRA", "EARTHWORM JIM", "KIRBY", "GOLDENEYE"];
-		var ranNum = Math.floor(Math.random()*index.length);
-		var ranWord = index[ranNum];
-		var displayWord = [];
-		var playerGuesses = [];
-		var misses = 0;
-		var wins = 0;
-		var loses = 0;
-		var musicOn = new Audio("assets/music/start.mp3");
-
+  <footer>  DanDaManTran &copy;2016</footer>
+  <script type="text/javascript">
+    var index=["HALO", "SUPER MARIO", "LEGEND OF ZELDA", "MORTAL KOMBAT", "FINAL FANTASY", "SONIC", "DONKEY KONG", "METAL GEAR SOLID", "SUPER SMASH BROS", "POKEMON", "KINGDOM HEARTS", "RESIDENT EVIL", "TETRIS", "MARBLE MADNESS", "CONTRA", "EARTHWORM JIM", "KIRBY", "GOLDENEYE"];
+    var ranNum = Math.floor(Math.random()*index.length);
+    var ranWord = index[ranNum];
+    var displayWord = [];
+    var playerGuesses = [];
+    var misses = 0;
+    var wins = 0;
+    var loses = 0;
+    var musicOn = new Audio("assets/music/start.mp3");
     //function to restart so everything starts over_________________________________
-		function restart(){
-  		displayWord = [];
-  		playerGuesses = [];
-			misses = 0;
-			ranNum = Math.floor(Math.random()*index.length);
-  		ranWord = index[ranNum];
-			//help display missing char it still have comas and i dont know how to fix that. I tried .join() but it doesn't keep the spaces
-			for(var i=0; i<ranWord.length; i++){
-				if(ranWord.charAt(i).match(/[a-z]/i)){
-					displayWord.push("?");
-				} else {
-					displayWord.push(" ");
-				}
-			}
-			document.getElementById("displayWord").innerHTML = displayWord.join("");
-			document.getElementById("playerGuesses").innerHTML = playerGuesses;
-			document.getElementById("loses").innerHTML = loses;
-			document.getElementById("wins").innerHTML = wins;
-			document.getElementById("picture").src = "assets/images/mario0.png";
-		}//_____________________________________________________________________________
-
+    function restart(){
+      displayWord = [];
+      playerGuesses = [];
+      misses = 0;
+      ranNum = Math.floor(Math.random()*index.length);
+      ranWord = index[ranNum];
+      //help display missing char it still have comas and i dont know how to fix that. I tried .join() but it doesn't keep the spaces
+      for(var i=0; i<ranWord.length; i++){
+        if(ranWord.charAt(i).match(/[a-z]/i)){
+          displayWord.push("?");
+        } else {
+          displayWord.push(" ");
+        }
+      }
+      document.getElementById("displayWord").innerHTML = displayWord.join("");
+      document.getElementById("playerGuesses").innerHTML = playerGuesses;
+      document.getElementById("loses").innerHTML = loses;
+      document.getElementById("wins").innerHTML = wins;
+      document.getElementById("picture").src = "assets/images/mario0.png";
+    }//_____________________________________________________________________________
     //setting everything up
     restart();
-
     //once the button is click it start
-		document.onkeyup = function(event){
+    document.onkeyup = function(event){
     
-			//start the game with some music so they can enjoy while play the game
-			musicOn.play();
-
-			//collect and display player guesses I am trying to fix it so they can't guess the same key and it show up multiple times
-  		var input = String.fromCharCode(event.keyCode).toUpperCase();
-  		if (input.match(/[a-z]/i)) {
-    		playerGuesses.push(input);
-    		document.getElementById("playerGuesses").innerHTML = playerGuesses.join(", ");
-  		} 
-
-  		//missCount is there so it can count how many letter is not in the generated word then it would add 1 to the "misses" and add a body part
-  		var missCount = 0;
-  		var j = 0;
-  		var l = 0;
+      //start the game with some music so they can enjoy while play the game
+      musicOn.play();
+      //collect and display player guesses I am trying to fix it so they can't guess the same key and it show up multiple times
+      var input = String.fromCharCode(event.keyCode).toUpperCase();
+      if (input.match(/[a-z]/i)) {
+        playerGuesses.push(input);
+        document.getElementById("playerGuesses").innerHTML = playerGuesses.join(", ");
+      } 
+      //missCount is there so it can count how many letter is not in the generated word then it would add 1 to the "misses" and add a body part
+      var missCount = 0;
+      var j = 0;
+      var l = 0;
       // counting the missCount
-  		for(j=0; j<ranWord.length; j++){
-  			if(ranWord.charAt(j)===input){
-  				displayWord[j] = input;
-  				document.getElementById("displayWord").innerHTML = displayWord.join("");
-  			} else {
-  				missCount += 1;
-  			}
-  		}
+      for(j=0; j<ranWord.length; j++){
+        if(ranWord.charAt(j)===input){
+          displayWord[j] = input;
+          document.getElementById("displayWord").innerHTML = displayWord.join("");
+        } else {
+          missCount += 1;
+        }
+      }
       
       //stop the misses from increasing if player guess same letter previously
       for(var i=0; i<playerGuesses.length-1; i++){
@@ -105,44 +100,38 @@
           break;
         }
       }
-
-  		//change images and misses depending on the number of misses
-  		if(missCount==j && input.match(/[a-z]/i)){
-  			misses += 1;
-  			document.getElementById("picture").src = "assets/images/mario"+misses+".png";
-  		}
-
-  		//Game Over add 1 to the lose score, stops bg-music play losing music restart everything
-  		if(misses==9){
-  			loses += 1;
-  			musicOn.pause();
-  			musicOn = new Audio("assets/music/lose.mp3");
-  			musicOn.play();
-  			musicOn = new Audio("assets/music/start.mp3");
+      //change images and misses depending on the number of misses
+      if(missCount==j && input.match(/[a-z]/i)){
+        misses += 1;
+        document.getElementById("picture").src = "assets/images/mario"+misses+".png";
+      }
+      //Game Over add 1 to the lose score, stops bg-music play losing music restart everything
+      if(misses==9){
+        loses += 1;
+        musicOn.pause();
+        musicOn = new Audio("assets/music/lose.mp3");
+        musicOn.play();
+        musicOn = new Audio("assets/music/start.mp3");
         document.getElementById("answer").innerHTML = "Muaha the answer was " + ranWord +". YOU LOSE!!";
-
-  			restart();
-  		}
-
+        restart();
+      }
       //counting the numbers of letter is correct so we can find out when you win
-  		var winCount = 0;
-  		for(k=0;k<displayWord.length;k++){
-  			if(displayWord[k]===ranWord.charAt(k)){
-  				winCount += 1;
-  			}
-  		}
-
-  		//Winner winner chicken dinner. add one to the win score stops backgroud music play winning music and restart the game
-  		if(winCount==displayWord.length){
-  			wins += 1; 
-  			musicOn.pause();
-  			musicOn = new Audio("assets/music/music" + ranNum + ".mp3");
-  			musicOn.play();
+      var winCount = 0;
+      for(k=0;k<displayWord.length;k++){
+        if(displayWord[k]===ranWord.charAt(k)){
+          winCount += 1;
+        }
+      }
+      //Winner winner chicken dinner. add one to the win score stops backgroud music play winning music and restart the game
+      if(winCount==displayWord.length){
+        wins += 1; 
+        musicOn.pause();
+        musicOn = new Audio("assets/music/music" + ranNum + ".mp3");
+        musicOn.play();
         document.getElementById("answer").innerHTML = "NOOO!!! Bet you can't do it again!!";
-
-  			restart();
-  		}
-		}
-	</script>
+        restart();
+      }
+    }
+  </script>
 </body>
 </html>
